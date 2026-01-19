@@ -1,0 +1,182 @@
+:root{
+  --white:#FBF9FA;
+  --blue:#AFDEF9;
+  --yellow:#FFE897;
+  --red:#E12E35;
+  --black:#2F373A;
+
+  --font-body: system-ui, Arial, sans-serif;
+  --font-display: "Outfit", system-ui, Arial, sans-serif;
+}
+
+*{ box-sizing:border-box; }
+html,body{ margin:0; padding:0; }
+
+body{
+  background: var(--white);
+  color: var(--black);
+  font-family: var(--font-body);
+  line-height: 1.55;
+}
+
+a{ color: inherit; }
+p{ margin: 0 0 12px; }
+
+.container{
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 20px;
+}
+
+/* ---------- Highlight "marker" effect ---------- */
+.hl{
+  position: relative;
+  display: inline-block;
+  padding: 0 .10em;
+}
+.hl::before{
+  content:"";
+  position:absolute;
+  left: -0.06em;
+  right: -0.06em;
+  bottom: .10em;
+  height: .62em;
+  border-radius: .35em;
+  z-index: -1;
+}
+.hl-blue::before{ background: var(--blue); }
+.hl-yellow::before{ background: var(--yellow); }
+.hl-red::before{ background: var(--red); }
+
+/* ---------- Header (centered) ---------- */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(251,249,250,.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(47,55,58,.12);
+}
+
+.header-centered{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 26px 18px 32px;
+}
+
+
+/* Top menu */
+.top-nav{
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: 18px; /* spacing between the invisible rectangles */
+  margin-bottom: 50px; /* space between menu and logo */
+
+}
+
+/* Each link is an invisible rectangle */
+.top-link{
+  position: relative;
+  font-family: var(--font-display);
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-decoration: none;
+  color: var(--black);
+
+  font-size: 13px;
+
+  display: inline-block;
+  width: 140px;     /* rectangle width */
+  text-align: center;
+
+  padding-top: 14px; /* space for the line */
+  padding-bottom: 6px;
+}
+
+/* The long thin line above each word */
+.top-link::before{
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 2px;
+  width: 120px; /* visible line width */
+  background: var(--black);
+  border-radius: 999px;
+  transition: background-color 160ms ease;
+}
+
+/* Hover anywhere on the word = line turns yellow */
+.top-link:hover::before{
+  background: var(--yellow);
+}
+
+/* Current page = line stays red */
+.top-link.active::before{
+  background: var(--red);
+}
+
+/* Logo */
+.logo{
+  text-decoration: none;
+  color: var(--black);
+}
+
+.logo-big img{
+  height: 160px;
+  width: auto;
+  display: block;
+
+  /* fade-in */
+  opacity: 0;
+  animation: logoFadeIn 1.25s ease-in-out forwards;
+}
+
+@keyframes logoFadeIn{
+  from{ opacity: 0; }
+  to{ opacity: 1; }
+}
+
+/* Motto under logo */
+.motto{
+  margin: 6px 0 0;
+  text-align: center;
+  color: var(--red);
+  font-family: var(--font-display);
+  letter-spacing: .08em;
+  line-height: 1.1;
+}
+
+.motto-line{
+  display: block;              /* forces each line onto its own row */
+  width: 100%;
+  text-align: center;
+
+  font-size: 14px;
+  overflow: hidden;
+
+  /* reveal animation */
+  clip-path: inset(0 100% 0 0);
+  animation: writeReveal 1.15s ease-out forwards;
+}
+
+.motto-line:last-child{
+  font-size: 18px;
+  letter-spacing: .14em;
+  margin-top: 4px;
+  animation-delay: .18s;
+}
+
+@keyframes writeReveal{
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0 0 0 0); }
+}
+
+/* ---------- Page content (minimal starter) ---------- */
+.hero h1{
+  font-family: var(--font-display);
+  font-size: 48px;
+  ma
